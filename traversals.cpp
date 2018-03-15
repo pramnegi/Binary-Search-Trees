@@ -272,9 +272,9 @@ public:
 
             cout<<nd->value<<" ";
 
-            inorder(nd->left);
+            preorder(nd->left);
 
-            inorder(nd->right);
+            preorder(nd->right);
 
         }
 
@@ -288,9 +288,9 @@ public:
 
         {
 
-            inorder(nd->left);
+            postorder(nd->left);
 
-            inorder(nd->right);
+            postorder(nd->right);
 
             cout<<nd->value<<" ";
 
