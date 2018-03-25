@@ -2,7 +2,7 @@
 
 bool has_path (node* tmp, int k) {
     if (tmp != NULL) {
-        if (k > 0) {
+        if (k > 0) { // this is not a good check, key of the tree can be negative
             if (has_path(tmp->left,k-tmp->value) || has_path(tmp->right,k-tmp->value))
                 return true;
         }
