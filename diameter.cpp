@@ -1,13 +1,13 @@
 #include "BS_Tree.h"
 
-int max_of (int a, int b) {
+int max_of(int a, int b) {
     if (a >= b)
         return a;
     else
         return b;
 }
 
-int max_of (int a, int b, int c) {
+int max_of(int a, int b, int c) {
     if (a >= b && a >= c)
         return a;
     else if (b >= a && b >= c)
@@ -16,19 +16,25 @@ int max_of (int a, int b, int c) {
         return c;
 }
 
-int tree_height(node* tmp) {
-    if (tmp != NULL) {
-        int left = tree_height(tmp->left);
-        int right = tree_height(tmp->right);
-        return (max_of(left,right)+1);
-    }
-    return 0;
+int tree_height(node* root) {
+    if(root == NULL)
+        return 0;
+    
+    int left = tree_height(root->left);
+    int right = tree_height(root->right);
+    return 1 + max(left, right);  // use #include <algorithm>    // std::max
 }
 
-int tree_diameter(node* tmp) {
-    if (tmp != NULL) {
+// what is the run_time for this, you can reduce this easily
+int tree_diameter(node* root) {
+    if (root != NULL) {
         int diam = 0;
-        diam = max_of (tree_height(tmp->left)+tree_height(tmp->right)+1,tree_diameter(tmp->left),tree_diameter(tmp->right));
+        int left_height = tree_height(root->left);
+        int right_height = tree_height(root->right);
+        int left_diameter = tree_diameter(root->left);
+        int right_diameter = tree_diameter(root->right);
+        
+        diam = max(max(left_height + right_height +1, left_diameter), right_diameter);
         return diam;
     }
 }
